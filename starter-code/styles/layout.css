@@ -16,7 +16,6 @@ section{
   margin: auto;
   display: block;
 }
-
 .byline, .byline a, .byline address, .byline time{
   color: darkgray;
   display: inline;
