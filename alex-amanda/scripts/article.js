@@ -19,11 +19,12 @@ Article.prototype.toHtml = function() {
   // It deep copies everything so all sub-elements of the article template are also copied.
 
   let $newArticle = $('article.template').clone();
+  $newArticle.removeClass('template');
 
   if (!this.publishedOn) $newArticle.addClass('draft');
   $newArticle.attr('data-category', this.category);
   $newArticle.find('header > div.byline > address > a').text(this.author);
-  $newArticle.find('header > div.byline > address > a').attr('href', this.authorUrl)
+  $newArticle.find('header > div.byline > address > a').attr('href', this.authorUrl);
   $newArticle.find('header > h1').text(this.title);
   $newArticle.find('section.article-body').html(this.body);
   $newArticle.find('header > div.byline > time').attr('datetime', this.publishedOn);
@@ -31,7 +32,7 @@ Article.prototype.toHtml = function() {
   // REVIEW: Display the date as a relative number of 'days ago'
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
   $newArticle.append('<hr>');
-  return $newArticle;
+  return $newArticle[0];
 };
 
 rawData.sort(function(a,b) {
@@ -39,12 +40,16 @@ rawData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
-// TODO: Refactor these for loops using the .forEach() array method.
+// DONE: Refactor these for loops using the .forEach() array method.
+// Turns the rawData into an article object.
+rawData.forEach(function (data) {
+  // Pushes the article object into an array.
+  articles.push(new Article(data));
+  console.log(articles);
+});
 
-for(let i = 0; i < rawData.length; i++) {
-  articles.push(new Article(rawData[i]));
-}
+// Turns all the articles into HTML for rendering.
+articles.forEach(function (data) {
+  $('#articles').append(data.toHtml());
 
-for(let i = 0; i < articles.length; i++) {
-  $('#articles').append(articles[i].toHtml());
-}
+});

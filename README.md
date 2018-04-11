@@ -6,7 +6,17 @@
 Complete [today's Kata](https://www.codewars.com/kata/my-head-is-at-the-wrong-end) and follow the submission instructions from Lab 01.
 
 ## Lab 02 Submission Instructions
-Follow the submission instructions from Lab 01.
+When you are finished with lab, follow these steps to submit your work. Create one pull request (aka: "PR") from your forked repo to the CF repo with your changes, and you'll each submit that same PR link in Canvas.
+
+1. Be sure to remember to do all of your work on non-master branches.
+2. Ensure that all your local changes are committed and pushed to your origin repo.
+3. Visit the origin repo on github.com, and ensure that all of your completed work has been merged to master via pull requests within your repo.
+4. Create a new PR from your fork to the CF repo and ensure the branches look correct.
+5. Fill in the template based on the check box prompts:
+    Write a good descriptive summary of your changes
+    Be sure to include how much time you spent on it and who you worked with.
+    Briefly reflect on and summarize your process.
+6. When you create the PR, it will have a unique URL. Copy this link, share with your partner, and paste it into the assignment submission form in Canvas. Both the driver and the navigator will submit the same PR link.Follow the submission instructions from Lab 01.
 
 ## Resources  
 [jQuery cheatsheet](https://oscarotero.com/jquery/)
