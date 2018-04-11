@@ -1,7 +1,7 @@
 'use strict';
 
 // COMMENT: How is this data utilized within our blog app? What is the structure of this data (your response should include the terms "object", "array", and "key/value pairs")?
-// PUT YOUR RESPONSE HERE
+// This is an array of objects representing the articles to be published on the blog. It has key/value pairs that contains all the bibliographic material needed to publish.  Each key represents a piece of bibliographic information that is needed for publishing.
 
 let rawData = [
   {

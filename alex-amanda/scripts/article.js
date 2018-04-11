@@ -16,26 +16,23 @@ function Article (rawDataObj) {
 
 Article.prototype.toHtml = function() {
   // COMMENT: What is the benefit of cloning the article? (see the jQuery docs)
-  // PUT YOUR RESPONSE HERE
+  // It deep copies everything so all sub-elements of the article template are also copied.
 
   let $newArticle = $('article.template').clone();
-  /* TODO: This cloned article still has a class of template. In our modules.css stylesheet, we should give all elements with a class of template a display of none so that our template does not display in the browser. But, we also need to make sure we're not accidentally hiding our cloned article. */
+  $newArticle.removeClass('template');
 
   if (!this.publishedOn) $newArticle.addClass('draft');
   $newArticle.attr('data-category', this.category);
-
-  /* TODO: Now use jQuery traversal and setter methods to fill in the rest of the current template clone with values of the properties of this particular Article instance.
-    We need to fill in:
-      1. author name,
-      2. author url,
-      3. article title,
-      4. article body, and
-      5. publication date. */
+  $newArticle.find('header > div.byline > address > a').text(this.author);
+  $newArticle.find('header > div.byline > address > a').attr('href', this.authorUrl);
+  $newArticle.find('header > h1').text(this.title);
+  $newArticle.find('section.article-body').html(this.body);
+  $newArticle.find('header > div.byline > time').attr('datetime', this.publishedOn);
 
   // REVIEW: Display the date as a relative number of 'days ago'
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
   $newArticle.append('<hr>');
-  return $newArticle;
+  return $newArticle[0];
 };
 
 rawData.sort(function(a,b) {
@@ -43,12 +40,16 @@ rawData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
-// TODO: Refactor these for loops using the .forEach() array method.
+// DONE: Refactor these for loops using the .forEach() array method.
+// Turns the rawData into an article object.
+rawData.forEach(function (data) {
+  // Pushes the article object into an array.
+  articles.push(new Article(data));
+  console.log(articles);
+});
 
-for(let i = 0; i < rawData.length; i++) {
-  articles.push(new Article(rawData[i]));
-}
+// Turns all the articles into HTML for rendering.
+articles.forEach(function (data) {
+  $('#articles').append(data.toHtml());
 
-for(let i = 0; i < articles.length; i++) {
-  $('#articles').append(articles[i].toHtml());
-}
+});

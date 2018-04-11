@@ -44,6 +44,10 @@ img {
   visibility: visible;
 }
 
+.template {
+  display: none;
+}
+
 @media screen and (min-width: 700px) {
 	img{
     max-width: 300px;
